@@ -8,12 +8,31 @@ const projects = [
     format: "Live Action + Animation",
     year: "2025-2026",
     role: "Writer / Director / Producer",
+    roleTag: "Director · Writer",
+    showcaseGroup: "Directing",
+    tempPoster: true,
     poster: "assets/posters/sweet-slumber.jpg",
     video: "",
     logline:
       "An original short about grief, acceptance, and a younger brother trying to process another loss before healing from the first.",
     details:
       "Wrote and revised the script, built mood boards and storyboards, led casting, secured locations, planned equipment, coordinated student crew schedules, directed actors, and now continue the post-production work through editing, color, VFX, and a 3D animation sequence."
+  },
+  {
+    title: "The Last Round",
+    slug: "the-last-round",
+    kind: "project",
+    status: "upcoming",
+    format: "Live Action",
+    year: "",
+    role: "",
+    roleTag: "",
+    showcaseGroup: "Upcoming Releases",
+    poster: "",
+    video: "",
+    logline:
+      "In the final round of a deadly game, the remaining players are forced to defend the choices that kept them alive. As the room turns into a debate about survival, guilt, and morality, the rules reveal how little room is left for anyone to leave unchanged.",
+    details: "More coming soon."
   },
   {
     title: "Wartime",
@@ -24,6 +43,8 @@ const projects = [
     format: "3D Animation + Live Action",
     year: "2024",
     role: "Co-Director / Producer",
+    roleTag: "Co-Director · Producer",
+    showcaseGroup: "Directing",
     poster: "assets/posters/wartime.jpg",
     video: "assets/videos/wartime.mp4",
     logline:
@@ -40,6 +61,8 @@ const projects = [
     format: "Live Action",
     year: "2025",
     role: "Sound Recordist / Editor / Sound Designer",
+    roleTag: "Sound · Editing",
+    showcaseGroup: "Sound",
     poster: "assets/posters/juxtaposed.png",
     video: "assets/videos/juxtaposed.mp4",
     logline:
@@ -56,6 +79,8 @@ const projects = [
     format: "Live Action",
     year: "2025-2026",
     role: "Sound Recordist / Boom Op / Dialogue Editor",
+    roleTag: "Production Sound",
+    showcaseGroup: "Sound",
     poster: "assets/posters/funeral-for-bro.png",
     video: "assets/videos/funeral-for-bro.mp4",
     logline:
@@ -72,6 +97,8 @@ const projects = [
     format: "Live Action",
     year: "2025-2026",
     role: "Sound Recordist / Sound Designer",
+    roleTag: "Production Sound",
+    showcaseGroup: "Sound",
     poster: "assets/posters/punk-house.jpg",
     video: "https://www.youtube.com/embed/WOkyFRa-SfM?si=E0MO0je_1-SIQ8zn",
     videoUrl: "https://www.youtube.com/watch?v=WOkyFRa-SfM",
@@ -90,6 +117,8 @@ const projects = [
     format: "Live Action",
     year: "2025-2026",
     role: "Continuity / DIT / Production Assistant",
+    roleTag: "Editing Assistant · Continuity · DIT",
+    showcaseGroup: "Continuity / Script Supervision",
     poster: "assets/posters/finding-your-dog.png",
     video: "",
     logline:
@@ -106,6 +135,9 @@ const projects = [
     format: "Live Action",
     year: "2026",
     role: "Lighting Operator / DIT / Continuity / Sound",
+    roleTag: "Lighting · DIT · Continuity · Sound",
+    showcaseGroup: "On-Set Support",
+    tempPoster: true,
     poster: "assets/posters/developing-world.jpg",
     video: "",
     logline:
@@ -122,6 +154,9 @@ const projects = [
     format: "Live Action",
     year: "2026",
     role: "Sound Recordist",
+    roleTag: "Production Sound",
+    showcaseGroup: "Sound",
+    tempPoster: true,
     poster: "assets/posters/trails-end.jpg",
     video: "",
     logline:
@@ -138,6 +173,9 @@ const projects = [
     format: "Live Event",
     year: "2025",
     role: "Camera Operator",
+    roleTag: "Camera Operation",
+    showcaseGroup: "Camera",
+    tempPoster: true,
     poster: "",
     video: "",
     logline:

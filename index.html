@@ -10,7 +10,7 @@
     />
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
+  <body class="home-page">
     <header class="site-header" aria-label="Main navigation">
       <a class="brand" href="#top" aria-label="Go to top">Bugashane Mugoovi</a>
       <nav class="nav-links" aria-label="Portfolio links">
@@ -19,18 +19,34 @@
             <path d="M6.94 8.9H3.68v10.42h3.26V8.9ZM5.31 7.48a1.9 1.9 0 1 0 0-3.8 1.9 1.9 0 0 0 0 3.8Zm14.98 6.02c0-3.14-1.68-4.6-3.92-4.6a3.38 3.38 0 0 0-3.05 1.68h-.04V8.9h-3.12v10.42h3.25v-5.16c0-1.36.26-2.68 1.95-2.68 1.66 0 1.68 1.56 1.68 2.76v5.08h3.25V13.5Z" />
           </svg>
         </a>
-        <a href="mailto:smugoovi@gmail.com" class="icon-link external-link" aria-label="Email" target="_blank" rel="noopener noreferrer">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20 5H4a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2Zm-.4 3.25-7.07 5.02a.92.92 0 0 1-1.06 0L4.4 8.25V7.8l7.6 5.4 7.6-5.4v.45Z" />
-          </svg>
-        </a>
-        <a href="https://www.imdb.com/name/nm18437627/" class="text-link external-link" target="_blank" rel="noopener noreferrer">IMDb</a>
+        <a href="contact.html" class="text-link">Contact</a>
+        <a href="" class="text-link external-link" target="_blank" rel="noopener noreferrer">IMDb</a>
         <a href="Bugashane_Mugoovi_Resume.html" class="text-link external-link" target="_blank" rel="noopener noreferrer">Resume</a>
       </nav>
     </header>
 
+    <button class="showcase-handle" type="button" aria-controls="showcase-drawer" aria-expanded="false">
+      Showcase
+    </button>
+
+    <aside class="showcase-drawer" id="showcase-drawer" aria-hidden="true" aria-label="Project showcase">
+      <div class="showcase-header">
+        <div>
+          <p class="eyebrow">Showcase</p>
+          <h2>Projects</h2>
+        </div>
+        <button class="panel-close" type="button" aria-label="Close showcase">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="m6.7 5.3 12 12-1.4 1.4-12-12 1.4-1.4Zm12 0 1.4 1.4-12 12-1.4-1.4 12-12Z" />
+          </svg>
+        </button>
+      </div>
+      <div class="showcase-list"></div>
+    </aside>
+
     <main id="top">
       <section class="hero" aria-label="Featured film carousel">
+        <p class="filmmaker-label">Filmmaker</p>
         <div class="ambient ambient-one"></div>
         <div class="ambient ambient-two"></div>
         <button class="carousel-button prev" type="button" aria-label="Previous project">
@@ -47,8 +63,9 @@
       </section>
     </main>
 
-    <footer class="site-footer">
-      <p>&copy; 2026 Created by Bugashane Mugoovi</p>
+    <footer class="site-footer site-footer--quote">
+      <p class="footer-credit">&copy; 2026 Created by Bugashane Mugoovi</p>
+      <p class="footer-quote">How do you expect unique results when you do ordinary things?</p>
     </footer>
 
     <script src="projects-data.js"></script>

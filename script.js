@@ -1,4 +1,4 @@
-const statusOrder = { current: 0, future: 1, past: 2 };
+const statusOrder = { current: 0, upcoming: 1, future: 2, past: 3 };
 const gradients = [
   "linear-gradient(145deg, #1b2520 0%, #8a7040 50%, #271b18 100%)",
   "linear-gradient(145deg, #182527 0%, #5b7f79 48%, #251715 100%)",
@@ -17,15 +17,13 @@ const startupProject = new URLSearchParams(window.location.search).get("project"
 
 if (startupProject) {
   const startupIndex = sortedProjects.findIndex((project) => project.slug === startupProject);
-  if (startupIndex >= 0) {
-    currentIndex = startupIndex;
-  }
-
+  if (startupIndex >= 0) currentIndex = startupIndex;
   window.history.replaceState({}, "", "index.html#top");
 }
 
 function labelFor(status) {
   if (status === "current") return "Current Project";
+  if (status === "upcoming") return "Upcoming Release";
   if (status === "reel") return "Demo Reel";
   if (status === "future") return "Future";
   return "Past Project";
@@ -53,28 +51,6 @@ function posterMarkup(project, index) {
   `;
 }
 
-function reelMarkup(project, index) {
-  if (project.video) {
-    const posterAttribute = project.poster ? ` poster="${project.poster}"` : "";
-    return `
-      <video class="reel-video" controls preload="metadata"${posterAttribute}>
-        <source src="${project.video}" />
-      </video>
-    `;
-  }
-
-  return `
-    <div class="reel-placeholder" style="--poster-gradient: ${gradients[index % gradients.length]}">
-      <div class="play-symbol" aria-hidden="true">
-        <svg viewBox="0 0 24 24">
-          <path d="M8 5.14v13.72L18.78 12 8 5.14Z" />
-        </svg>
-      </div>
-      <span>Demo Reel Video</span>
-    </div>
-  `;
-}
-
 function statusMarkup(project) {
   const statusChips = [`<div class="status-pill status-main">
         <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -88,12 +64,10 @@ function statusMarkup(project) {
   }
 
   statusChips.push(`<div class="status-pill">${project.format}</div>`);
+  if (project.roleTag) statusChips.push(`<div class="status-pill role-pill">${project.roleTag}</div>`);
+  if (project.tempPoster) statusChips.push(`<div class="status-pill temp-poster-pill">Temporary Poster</div>`);
 
-  return `
-    <div class="card-labels">
-      ${statusChips.join("")}
-    </div>
-  `;
+  return `<div class="card-labels">${statusChips.join("")}</div>`;
 }
 
 function positionFor(index) {
@@ -113,8 +87,7 @@ function positionFor(index) {
 
 function updateCarousel() {
   document.querySelectorAll(".project-card").forEach((card) => {
-    const index = Number(card.dataset.index);
-    card.dataset.position = positionFor(index);
+    card.dataset.position = positionFor(Number(card.dataset.index));
   });
 }
 
@@ -123,35 +96,31 @@ function buildCarousel() {
 
   sortedProjects.forEach((project, index) => {
     const card = document.createElement("article");
-    const cardClasses = ["project-card"];
-    if (project.kind === "reel") cardClasses.push("is-reel");
-    if (project.kind === "reel" && project.video) cardClasses.push("has-video");
-    card.className = cardClasses.join(" ");
+    card.className = "project-card";
     card.dataset.index = String(index);
     card.dataset.position = positionFor(index);
-    card.setAttribute("aria-label", `${project.title}, ${labelFor(project.status)}`);
+    card.setAttribute(
+      "aria-label",
+      [project.title, labelFor(project.status), project.roleTag].filter(Boolean).join(", ")
+    );
     card.innerHTML = `
-      ${project.kind === "reel" ? reelMarkup(project, index) : posterMarkup(project, index)}
+      ${posterMarkup(project, index)}
       ${statusMarkup(project)}
       <div class="card-copy">
         <h2>${project.title}</h2>
         <p>${project.logline}</p>
-        <span class="learn-more">${project.kind === "reel" ? "Play In Place" : "Learn More"}</span>
+        <span class="learn-more">Learn More</span>
       </div>
     `;
 
-    card.addEventListener("click", (event) => {
-      if (event.target.closest("video")) return;
-
+    card.addEventListener("click", () => {
       const position = card.dataset.position;
-      if (project.kind === "reel" && position === "center") return;
-
       if (position === "center") {
         window.location.href = `project.html?project=${project.slug}`;
         return;
       }
 
-      if (position === "left" || position === "right" || position === "far-left" || position === "far-right") {
+      if (["left", "right", "far-left", "far-right"].includes(position)) {
         currentIndex = index;
         updateCarousel();
       }
@@ -166,12 +135,82 @@ function moveCarousel(direction) {
   updateCarousel();
 }
 
+function buildShowcase() {
+  const list = document.querySelector(".showcase-list");
+  const groups = new Map();
+
+  sortedProjects.forEach((project) => {
+    const group = project.showcaseGroup || "Other Work";
+    if (!groups.has(group)) groups.set(group, []);
+    groups.get(group).push(project);
+  });
+
+  list.innerHTML = Array.from(groups, ([group, items]) => `
+    <section class="showcase-group">
+      <h3>${group}</h3>
+      <div class="showcase-projects">
+        ${items
+          .map(
+            (project) => `
+              <a class="showcase-project" href="project.html?project=${project.slug}">
+                <span>${project.title}</span>
+                <small>${project.roleTag || project.format}</small>
+              </a>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `).join("");
+}
+
+function setupShowcase() {
+  const handle = document.querySelector(".showcase-handle");
+  const drawer = document.querySelector(".showcase-drawer");
+  const closeButton = drawer.querySelector(".panel-close");
+  let isOpen = false;
+  let touchStartX = 0;
+
+  function setOpen(nextOpen) {
+    isOpen = nextOpen;
+    drawer.classList.toggle("is-open", isOpen);
+    document.body.classList.toggle("showcase-is-open", isOpen);
+    drawer.setAttribute("aria-hidden", String(!isOpen));
+    handle.setAttribute("aria-expanded", String(isOpen));
+  }
+
+  handle.addEventListener("click", () => setOpen(!isOpen));
+  closeButton.addEventListener("click", () => setOpen(false));
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && isOpen) setOpen(false);
+  });
+
+  document.addEventListener("click", (event) => {
+    if (isOpen && !drawer.contains(event.target) && !handle.contains(event.target)) {
+      setOpen(false);
+    }
+  });
+
+  document.addEventListener("touchstart", (event) => {
+    touchStartX = event.changedTouches[0].clientX;
+  }, { passive: true });
+
+  document.addEventListener("touchend", (event) => {
+    const endX = event.changedTouches[0].clientX;
+    const distance = endX - touchStartX;
+    if (!isOpen && touchStartX > window.innerWidth - 56 && distance < -48) setOpen(true);
+    if (isOpen && distance > 48) setOpen(false);
+  }, { passive: true });
+}
+
 document.querySelector(".prev").addEventListener("click", () => moveCarousel(-1));
 document.querySelector(".next").addEventListener("click", () => moveCarousel(1));
-
 document.addEventListener("keydown", (event) => {
   if (event.key === "ArrowLeft") moveCarousel(-1);
   if (event.key === "ArrowRight") moveCarousel(1);
 });
 
 buildCarousel();
+buildShowcase();
+setupShowcase();

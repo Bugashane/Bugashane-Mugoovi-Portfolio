@@ -1,4 +1,4 @@
-const statusOrder = { current: 0, future: 1, past: 2 };
+const statusOrder = { current: 0, upcoming: 1, future: 2, past: 3 };
 const sortedProjects = [...projects].sort((a, b) => {
   const statusDifference = statusOrder[a.status] - statusOrder[b.status];
   return statusDifference || projects.indexOf(a) - projects.indexOf(b);
@@ -13,6 +13,7 @@ const gradients = [
 
 function labelFor(status) {
   if (status === "current") return "Current Project";
+  if (status === "upcoming") return "Upcoming Release";
   if (status === "reel") return "Demo Reel";
   if (status === "future") return "Future";
   return "Past Project";
@@ -46,9 +47,68 @@ const detail = document.querySelector("#project-detail");
 const longDetail = window.projectDetails?.[project.slug];
 const heroDetail = longDetail?.[0];
 const bodyDetails = longDetail?.slice(1);
-const eyebrowParts = [labelFor(project.status)];
-if (project.slug === "finding-your-dog") eyebrowParts.push(project.productionStatus);
-eyebrowParts.push(project.format);
+
+function escapeHtml(value) {
+  return String(value).replace(/[&<>"']/g, (character) => ({
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#039;"
+  })[character]);
+}
+
+function emphasizeProjectText(value) {
+  const phrases = [
+    "pre-production",
+    "post-production",
+    "production sound",
+    "directed actors",
+    "lighting and sound",
+    "lighting",
+    "sound design",
+    "sound",
+    "editing",
+    "color grading",
+    "color",
+    "VFX",
+    "3D animation",
+    "animation",
+    "casting",
+    "scheduling",
+    "producing",
+    "producer responsibilities",
+    "writing",
+    "director responsibilities",
+    "continuity",
+    "DIT",
+    "media management",
+    "camera operator",
+    "camera",
+    "equipment rental",
+    "storyboard",
+    "storyboards",
+    "dialogue",
+    "audio",
+    "location",
+    "locations",
+    "task-management system",
+    "task management"
+  ];
+  const pattern = new RegExp(`\\b(${phrases.sort((a, b) => b.length - a.length).join("|")})\\b`, "gi");
+  return escapeHtml(value).replace(pattern, "<strong>$1</strong>");
+}
+
+function projectTagsMarkup() {
+  const tags = [
+    `<span class="status-pill status-main">${labelFor(project.status)}</span>`,
+    `<span class="status-pill">${project.format}</span>`
+  ];
+  if (project.slug === "finding-your-dog") tags.push(`<span class="status-pill">${project.productionStatus}</span>`);
+  if (project.roleTag) tags.push(`<span class="status-pill role-pill">${project.roleTag}</span>`);
+  if (project.tempPoster) tags.push(`<span class="status-pill temp-poster-pill">Temporary Poster</span>`);
+  return tags.join("");
+}
 
 function renderDetailSections(sections) {
   if (!sections?.length) return "";
@@ -56,22 +116,24 @@ function renderDetailSections(sections) {
   return sections
     .map(
       (section) => `
-        <section class="detail-section">
-          <h2>${section.title}</h2>
-          ${section.items.map((item) => `<p>${item}</p>`).join("")}
-        </section>
+        <details class="detail-section">
+          <summary><span>${section.title}</span><span class="detail-section-toggle">View notes</span></summary>
+          <div class="detail-section-content">
+            ${section.items.map((item) => `<p>${emphasizeProjectText(item)}</p>`).join("")}
+          </div>
+        </details>
       `
     )
     .join("");
 }
 
 function renderHeroDetail(section) {
-  if (!section) return `<p class="project-overview">${project.details}</p>`;
+  if (!section) return `<p class="project-overview">${emphasizeProjectText(project.details)}</p>`;
 
   return `
     <section class="hero-overview">
       <h2>${section.title}</h2>
-      ${section.items.map((item) => `<p>${item}</p>`).join("")}
+      ${section.items.map((item) => `<p>${emphasizeProjectText(item)}</p>`).join("")}
     </section>
   `;
 }
@@ -261,22 +323,29 @@ detail.innerHTML = `
     <a class="back-link" href="${homeHref}">Back</a>
     <div class="project-poster-frame">
       ${posterMarkup(project, projectIndex)}
+      ${project.tempPoster ? `<span class="project-poster-badge">Temporary Poster</span>` : ""}
     </div>
     <div class="project-info">
-      <p class="eyebrow">${eyebrowParts.join(" / ")}</p>
+      <div class="project-tags">${projectTagsMarkup()}</div>
       <h1>${project.title}</h1>
       <p class="project-logline">${project.logline}</p>
-      <div class="panel-meta">
-        <span>${project.year}</span>
-        <span>${project.role}</span>
-        ${project.slug === "finding-your-dog" ? `<span>${project.productionStatus}</span>` : ""}
-        <span>${project.format}</span>
-      </div>
-      ${renderHeroDetail(heroDetail)}
+      ${
+        project.status === "upcoming"
+          ? `<p class="upcoming-note">More coming soon.</p>`
+          : `
+            <div class="panel-meta">
+              <span>${project.year}</span>
+              <span>${project.role}</span>
+              ${project.slug === "finding-your-dog" ? `<span>${project.productionStatus}</span>` : ""}
+              <span>${project.format}</span>
+            </div>
+            ${renderHeroDetail(heroDetail)}
+          `
+      }
     </div>
   </section>
   ${
-    bodyDetails?.length
+    project.status !== "upcoming" && bodyDetails?.length
       ? `<section class="project-writing">${renderDetailSections(bodyDetails)}</section>`
       : ""
   }
