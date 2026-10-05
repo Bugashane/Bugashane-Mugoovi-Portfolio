@@ -1000,7 +1000,8 @@ button {
 }
 
 .project-gallery,
-.wartime-process {
+.wartime-process,
+.project-documents {
   max-width: 1180px;
   margin: 58px auto 0;
 }

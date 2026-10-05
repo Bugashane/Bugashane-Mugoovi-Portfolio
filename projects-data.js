@@ -23,16 +23,28 @@ const projects = [
     slug: "the-last-round",
     kind: "project",
     status: "upcoming",
+    productionStatus: "In Progress",
     format: "Live Action",
-    year: "",
-    role: "",
-    roleTag: "",
+    year: "2026",
+    role: "Writer / Director",
+    roleTag: "Writer · Director",
     showcaseGroup: "Upcoming Releases",
     poster: "",
-    video: "",
+    video: "assets/videos/the-last-round-rough-cut.mp4",
     logline:
       "In the final round of a deadly game, the remaining players are forced to defend the choices that kept them alive. As the room turns into a debate about survival, guilt, and morality, the rules reveal how little room is left for anyone to leave unchanged.",
-    details: "More coming soon."
+    details:
+      "An upcoming live-action short I am writing and directing. This rough-cut sneak peek of the opening was assembled to show the project’s current progress to students; it is not the final cut.",
+    documents: [
+      {
+        href: "assets/docs/the-last-round/the-last-round-script.pdf",
+        label: "Read the Script (PDF)"
+      },
+      {
+        href: "assets/docs/the-last-round/the-last-round-shotlist.xlsx",
+        label: "View the Shot List (XLSX)"
+      }
+    ]
   },
   {
     title: "Wartime",

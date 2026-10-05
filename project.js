@@ -161,6 +161,29 @@ function renderProjectVideo(project) {
   `;
 }
 
+function renderProjectDocuments(project) {
+  if (!project.documents?.length) return "";
+
+  return `
+    <section class="project-documents">
+      <div class="gallery-heading">
+        <p class="eyebrow">Development Materials</p>
+        <h2>Script &amp; Shot List</h2>
+      </div>
+      <div class="pdf-links">
+        <p>These working materials offer a closer look at the planning behind the project’s current stage.</p>
+        ${project.documents
+          .map(
+            (doc) => `
+              <a href="${doc.href}" target="_blank" rel="noopener noreferrer">${doc.label}</a>
+            `
+          )
+          .join("")}
+      </div>
+    </section>
+  `;
+}
+
 function renderGalleryButton(image, index, galleryKey, className) {
   return `
     <button class="${className}" type="button" data-gallery="${galleryKey}" data-gallery-index="${index}" aria-label="Open photo ${index + 1}">
@@ -329,28 +352,23 @@ detail.innerHTML = `
       <div class="project-tags">${projectTagsMarkup()}</div>
       <h1>${project.title}</h1>
       <p class="project-logline">${project.logline}</p>
-      ${
-        project.status === "upcoming"
-          ? `<p class="upcoming-note">More coming soon.</p>`
-          : `
-            <div class="panel-meta">
-              <span>${project.year}</span>
-              <span>${project.role}</span>
-              ${project.slug === "finding-your-dog" ? `<span>${project.productionStatus}</span>` : ""}
-              <span>${project.format}</span>
-            </div>
-            ${renderHeroDetail(heroDetail)}
-          `
-      }
+      <div class="panel-meta">
+        ${project.year ? `<span>${project.year}</span>` : ""}
+        ${project.role ? `<span>${project.role}</span>` : ""}
+        ${project.productionStatus ? `<span>${project.productionStatus}</span>` : ""}
+        <span>${project.format}</span>
+      </div>
+      ${renderHeroDetail(heroDetail)}
     </div>
   </section>
   ${
-    project.status !== "upcoming" && bodyDetails?.length
+    bodyDetails?.length
       ? `<section class="project-writing">${renderDetailSections(bodyDetails)}</section>`
       : ""
   }
   ${renderWartimeProcess()}
   ${renderProjectVideo(project)}
+  ${renderProjectDocuments(project)}
   ${renderGallery(project)}
 `;
 
