@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Resume Updater | Bugashane Mugoovi</title>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #171815;
+        color: #f4efe5;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      main {
+        width: min(1180px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 34px 0 44px;
+      }
+      h1, h2, h3, p { margin-top: 0; }
+      h1 { font-size: clamp(2rem, 4vw, 3.2rem); margin-bottom: 6px; }
+      .lede { color: #b9ad9b; max-width: 76ch; line-height: 1.6; }
+      .layout {
+        display: grid;
+        grid-template-columns: minmax(300px, 420px) minmax(0, 1fr);
+        gap: 22px;
+        align-items: start;
+      }
+      .panel, .preview {
+        border: 1px solid rgba(244, 239, 229, 0.14);
+        border-radius: 14px;
+        background: #211e19;
+        box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
+      }
+      .panel { padding: 18px; }
+      .preview { overflow: hidden; }
+      label {
+        display: grid;
+        gap: 6px;
+        margin-top: 12px;
+        color: #d6ccb9;
+        font-size: 0.84rem;
+        font-weight: 700;
+      }
+      input, select, textarea {
+        width: 100%;
+        border: 1px solid rgba(244, 239, 229, 0.16);
+        border-radius: 8px;
+        background: #151b19;
+        color: #f4efe5;
+        font: inherit;
+        padding: 10px;
+      }
+      textarea { min-height: 104px; resize: vertical; line-height: 1.45; }
+      .row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 16px;
+      }
+      button {
+        min-height: 40px;
+        border: 0;
+        border-radius: 999px;
+        padding: 0 16px;
+        background: #d1ad62;
+        color: #15130f;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      button.secondary {
+        background: rgba(244, 239, 229, 0.1);
+        color: #f4efe5;
+      }
+      .note {
+        margin: 14px 0 0;
+        color: #b9ad9b;
+        font-size: 0.86rem;
+        line-height: 1.5;
+      }
+      .skill-list {
+        display: grid;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .skill-list input { font-size: 0.86rem; }
+      iframe {
+        width: 100%;
+        height: 78vh;
+        border: 0;
+        background: white;
+      }
+      @media (max-width: 900px) {
+        .layout { grid-template-columns: 1fr; }
+        iframe { height: 70vh; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>Update Resume</h1>
+      <p class="lede">Private local tool for editing your resume content. It is not linked from the public portfolio. Add a new experience, replace an older one, adjust current experience, edit skills, then export a new HTML resume.</p>
+
+      <div class="layout">
+        <section class="panel" aria-label="Resume controls">
+          <label>
+            Edit Mode
+            <select id="mode">
+              <option value="new">Add New Experience</option>
+              <option value="replace">Replace Previous Experience</option>
+              <option value="edit">Change Current Experience</option>
+            </select>
+          </label>
+
+          <label id="target-wrap">
+            Select Experience
+            <select id="target"></select>
+          </label>
+
+          <label>
+            Experience Title and Role
+            <input id="title" placeholder="Project Name - Role / Role / Role" />
+          </label>
+
+          <div class="row">
+            <label>
+              Date
+              <input id="date" placeholder="2026" />
+            </label>
+            <label>
+              Status / Type
+              <input id="meta" placeholder="Live-action short | In post-production" />
+            </label>
+          </div>
+
+          <label>
+            Bullet Points
+            <textarea id="bullets" placeholder="Put each bullet on its own line. Keep the strongest 1-2 bullets if the resume gets crowded."></textarea>
+          </label>
+
+          <div class="actions">
+            <button id="apply" type="button">Apply to Resume</button>
+            <button id="clear-form" class="secondary" type="button">Clear Form</button>
+          </div>
+
+          <h2>Skills</h2>
+          <div id="skills" class="skill-list"></div>
+
+          <div class="actions">
+            <button id="save-skills" type="button">Update Skills</button>
+            <button id="download" class="secondary" type="button">Download Resume HTML</button>
+            <button id="reset" class="secondary" type="button">Reset Draft</button>
+          </div>
+
+          <p class="note">This page saves drafts in your browser only. To use the result, download the updated HTML and replace <strong>Bugashane_Mugoovi_Resume.html</strong> when you are ready.</p>
+        </section>
+
+        <section class="preview" aria-label="Resume preview">
+          <iframe id="preview" title="Resume preview"></iframe>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      const baseResume = {
+        skills: [
+          ["Producing & Coordination", "production logistics, crew coordination, scheduling, casting support, location access, equipment planning, script breakdowns, meeting notes, task tracking, deadline management."],
+          ["Set Operations", "continuity logs, DIT/media backup, production sound, boom operation, lighting support, camera operation, live-event coverage, assistant director communication, set problem-solving."],
+          ["Post & Creative Tools", "Adobe Premiere Pro, After Effects, Photoshop, DaVinci Resolve, editing, color, VFX, sound design, dialogue sync, structured file systems, Google Workspace, Canva, Houdini/VFX coordination."]
+        ],
+        experiences: [
+          {
+            title: "Sweet Slumber - Writer / Director / Producer",
+            date: "2025-2026",
+            meta: "Original live-action + animation short | In post-production",
+            bullets: [
+              "Developed the short from concept through post, writing and revising the script, building mood boards/storyboards, leading casting, securing locations, planning equipment, hiring crew, coordinating schedules, and directing actors.",
+              "Continue to manage editing, color, VFX, and a self-built 3D animation sequence, balancing creative direction with render time, asset needs, and final delivery planning."
+            ]
+          },
+          {
+            title: "Wartime - Co-Director / Producer",
+            date: "2024",
+            meta: "Class-wide hybrid 3D animation + live-action short | Completed",
+            bullets: [
+              "Co-directed story and stepped into producer responsibilities for a 30+ student production across animation, rigging, live-action/broadcast, filming, and storyboarding teams.",
+              "Built a Google Forms, Google Tasks, and master-tracker workflow to assign team members by skill, redirect people across departments, track equipment/location needs, and keep the project moving toward delivery."
+            ]
+          },
+          {
+            title: "Ten Short Films About Finding Your Dog - Editing Assistant / Continuity / DIT / PA",
+            date: "2025-2026",
+            meta: "IMDb-credited editorial department role | Narrative production | In post-production",
+            bullets: [
+              "Logged scene and take continuity under fast set conditions, tracked visual/dialogue changes, flagged continuity issues to the Assistant Director, and supported lighting and set needs between primary duties.",
+              "Managed DIT workflow by transferring, numbering, organizing, and backing up footage with scene/take folders and continuity PDFs so post-production could quickly understand each take."
+            ]
+          },
+          {
+            title: "Juxtaposed - Sound Recordist / Editor / Sound Designer",
+            date: "2025",
+            meta: "Experimental live-action short | Completed",
+            bullets: [
+              "Reviewed the script scene by scene for dialogue and non-dialogue sound needs, scouted locations for noise issues, supported lighting, and built sound notes for post-production coverage.",
+              "Edited the project from raw footage through selects, pacing, color, audio, and final export, making deliberate creative choices to support the film's concept."
+            ]
+          },
+          {
+            title: "Funeral For Bro / Punk House / Trail's End - Production Sound Roles",
+            date: "2025-2026",
+            meta: "Senior capstone and narrative short productions",
+            bullets: [
+              "Planned boom, windscreen, mic placement, room tone, ambience, Foley-adjacent detail sounds, ADR support, dialogue sync, and organized audio stems across indoor, outdoor, crowded, and wind-sensitive set conditions.",
+              "Solved Punk House's basement band scene with a two-take strategy, capturing separate instrument and crowd-reaction layers so post-production could blend the scene cleanly."
+            ]
+          },
+          {
+            title: "Developing World - Lighting Operator / DIT / Continuity / Sound",
+            date: "2026",
+            meta: "Live-action short | Completed production / entering post",
+            bullets: [
+              "Ran lighting, DIT, continuity, and sound responsibilities in tight setups, balancing director/cinematographer notes, exposure, moving-camera framing, boom placement, and organized media handling."
+            ]
+          }
+        ]
+      };
+
+      const storageKey = "bugashane-resume-draft";
+      let resume = JSON.parse(localStorage.getItem(storageKey) || "null") || structuredClone(baseResume);
+
+      const mode = document.querySelector("#mode");
+      const target = document.querySelector("#target");
+      const targetWrap = document.querySelector("#target-wrap");
+      const title = document.querySelector("#title");
+      const date = document.querySelector("#date");
+      const meta = document.querySelector("#meta");
+      const bullets = document.querySelector("#bullets");
+      const skills = document.querySelector("#skills");
+      const preview = document.querySelector("#preview");
+
+      function escapeHtml(value) {
+        return String(value).replace(/[&<>"']/g, (char) => ({
+          "&": "&amp;",
+          "<": "&lt;",
+          ">": "&gt;",
+          "\"": "&quot;",
+          "'": "&#039;"
+        })[char]);
+      }
+
+      function resumeHtml(data) {
+        const skillHtml = data.skills.map(([name, text]) => `<p class="skill-line"><strong>${escapeHtml(name)}:</strong> ${escapeHtml(text)}</p>`).join("");
+        const expHtml = data.experiences.map((item) => `
+          <div class="item">
+            <div class="item-title"><span>${escapeHtml(item.title)}</span><span>${escapeHtml(item.date)}</span></div>
+            <p class="meta">${escapeHtml(item.meta)}</p>
+            <ul>${item.bullets.map((bullet) => `<li>${escapeHtml(bullet)}</li>`).join("")}</ul>
+          </div>
+        `).join("");
+
+        return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bugashane Mugoovi | Resume</title>
+<style>
+@page{size:letter;margin:.45in}*{box-sizing:border-box}body{margin:0;background:#f1efe9;color:#20241f;font-family:Arial,Helvetica,sans-serif;font-size:9.2pt;line-height:1.24}a{color:#496554;text-decoration:none}.resume{width:8.5in;min-height:11in;margin:24px auto;padding:.42in .5in;background:#fff;box-shadow:0 18px 48px rgba(35,38,31,.18)}header{display:grid;gap:4px;border-bottom:2px solid #6f7c5d;padding-bottom:8px;margin-bottom:8px}h1{margin:0;font-size:23pt;line-height:1;color:#1d221f}.headline{margin:0;color:#8a5a22;font-size:9.7pt;font-weight:700;text-transform:uppercase}.contact{display:flex;flex-wrap:wrap;gap:3px 9px;color:#3f443f;font-size:8.7pt}section{margin-top:7px}h2{margin:0 0 3px;color:#4f6c58;font-size:9.2pt;letter-spacing:.06em;text-transform:uppercase;border-bottom:1px solid #d9ded2;padding-bottom:2px}p{margin:0}.item{margin-top:5px}.item:first-of-type{margin-top:0}.item-title{display:flex;justify-content:space-between;gap:14px;align-items:baseline;font-weight:700}.item-title span:last-child{color:#555b54;font-size:8.6pt;font-weight:700;white-space:nowrap}.meta{color:#555b54;font-size:8.7pt;font-style:italic}ul{margin:2px 0 0 15px;padding:0}li{margin:0}.skills{display:grid;gap:2px}.skill-line strong{color:#222721}.two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}@media print{body{background:#fff}.resume{width:auto;min-height:auto;margin:0;padding:0;box-shadow:none}a{color:inherit}}
+</style>
+</head>
+<body>
+<main class="resume">
+<header>
+<h1>Bugashane Mugoovi</h1>
+<p class="headline">Producer-Track Filmmaker | Production Coordinator | Post-Production | Sound & DIT</p>
+<div class="contact"><span>West Lafayette, Indiana</span><span>|</span><a href="mailto:smugoovi@gmail.com">smugoovi@gmail.com</a><span>|</span><a href="https://www.linkedin.com/in/bugashane-mugoovi/">LinkedIn: Bugashane Mugoovi</a></div>
+</header>
+<section><h2>Education</h2><div class="item"><div class="item-title"><span>Purdue University, West Lafayette, IN</span><span>Expected 2027</span></div><p class="meta">B.S. Computer Graphics Technology: Game Development, Animation & Visual Effects; Minor: Film & Video Studies; additional coursework in Business and French</p></div></section>
+<section><h2>Skills</h2><div class="skills">${skillHtml}</div></section>
+<section><h2>Selected Film & Production Experience</h2>${expHtml}</section>
+<section><h2>Additional Production Experience</h2><div class="item"><div class="item-title"><span>Live Event Recording - Camera Operator, Purdue University</span><span>2025</span></div><p class="meta">Theatre and dance productions including The Snow and PCDC Winter Works</p><ul><li>Operated Sony mirrorless cameras during live performances, making real-time framing, exposure, white balance, and coverage decisions in no-reshoot environments.</li></ul></div></section>
+<section class="two-col"><div><h2>Awards</h2><ul><li>Greater Indy Habitat for Humanity Scholarship Recipient, 2023, 2024, 2025</li></ul></div><div><h2>Languages</h2><ul><li>Swahili; French reading/coursework, limited speaking proficiency</li></ul></div></section>
+</main>
+</body>
+</html>`;
+      }
+
+      function save() {
+        localStorage.setItem(storageKey, JSON.stringify(resume));
+      }
+
+      function renderSelectors() {
+        target.innerHTML = resume.experiences.map((item, index) => `<option value="${index}">${escapeHtml(item.title)}</option>`).join("");
+        targetWrap.style.display = mode.value === "new" ? "none" : "grid";
+      }
+
+      function renderSkills() {
+        skills.innerHTML = resume.skills.map(([name, text], index) => `
+          <input data-skill-name="${index}" value="${escapeHtml(name)}" aria-label="Skill category ${index + 1}" />
+          <textarea data-skill-text="${index}" aria-label="Skill text ${index + 1}">${escapeHtml(text)}</textarea>
+        `).join("");
+      }
+
+      function renderPreview() {
+        preview.srcdoc = resumeHtml(resume);
+      }
+
+      function fillFormFromTarget() {
+        if (mode.value === "new") return;
+        const item = resume.experiences[Number(target.value)];
+        title.value = item.title;
+        date.value = item.date;
+        meta.value = item.meta;
+        bullets.value = item.bullets.join("\n");
+      }
+
+      function refresh() {
+        renderSelectors();
+        renderSkills();
+        renderPreview();
+      }
+
+      mode.addEventListener("change", () => {
+        renderSelectors();
+        if (mode.value === "new") {
+          title.value = "";
+          date.value = "";
+          meta.value = "";
+          bullets.value = "";
+        } else {
+          fillFormFromTarget();
+        }
+      });
+      target.addEventListener("change", fillFormFromTarget);
+
+      document.querySelector("#apply").addEventListener("click", () => {
+        const item = {
+          title: title.value.trim(),
+          date: date.value.trim(),
+          meta: meta.value.trim(),
+          bullets: bullets.value.split("\n").map((line) => line.trim()).filter(Boolean)
+        };
+        if (!item.title || !item.date || !item.meta || !item.bullets.length) return;
+        if (mode.value === "new") resume.experiences.unshift(item);
+        if (mode.value === "replace" || mode.value === "edit") resume.experiences[Number(target.value)] = item;
+        save();
+        refresh();
+      });
+
+      document.querySelector("#clear-form").addEventListener("click", () => {
+        title.value = "";
+        date.value = "";
+        meta.value = "";
+        bullets.value = "";
+      });
+
+      document.querySelector("#save-skills").addEventListener("click", () => {
+        resume.skills = resume.skills.map((_, index) => [
+          document.querySelector(`[data-skill-name="${index}"]`).value.trim(),
+          document.querySelector(`[data-skill-text="${index}"]`).value.trim()
+        ]);
+        save();
+        renderPreview();
+      });
+
+      document.querySelector("#download").addEventListener("click", () => {
+        const blob = new Blob([resumeHtml(resume)], { type: "text/html" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = "Bugashane_Mugoovi_Resume.html";
+        link.click();
+        URL.revokeObjectURL(link.href);
+      });
+
+      document.querySelector("#reset").addEventListener("click", () => {
+        resume = structuredClone(baseResume);
+        save();
+        refresh();
+      });
+
+      refresh();
+    </script>
+  </body>
+</html>
