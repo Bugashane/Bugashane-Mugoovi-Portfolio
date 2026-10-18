@@ -154,12 +154,14 @@ button {
 .showcase-handle {
   position: fixed;
   z-index: 52;
+  display: grid;
+  place-items: center;
   top: 22%;
   right: 12px;
-  min-width: 42px;
-  height: 116px;
-  min-height: 116px;
-  padding: 10px;
+  min-width: 46px;
+  height: 172px;
+  min-height: 172px;
+  padding: 14px 7px;
   border: 1px solid rgba(244, 239, 229, 0.16);
   border-radius: 999px;
   background: rgba(45, 39, 27, 0.94);
@@ -167,7 +169,7 @@ button {
   color: var(--ink);
   box-shadow: -10px 16px 36px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  font-size: 0.55rem;
+  font-size: 0.72rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -178,9 +180,10 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0;
+  justify-content: center;
+  gap: 2px;
   letter-spacing: 0;
-  line-height: 0.8;
+  line-height: 0.9;
 }
 
 .showcase-handle:hover,
@@ -541,6 +544,10 @@ button {
   text-transform: uppercase;
   white-space: nowrap;
   pointer-events: none;
+}
+
+.direction-cue[hidden] {
+  display: none;
 }
 
 .project-card[data-position="left"] .card-labels,
@@ -1719,10 +1726,11 @@ button {
   }
 
   .showcase-handle {
-    height: 106px;
-    min-height: 106px;
-    padding: 8px 10px;
-    font-size: 0.5rem;
+    min-width: 43px;
+    height: 156px;
+    min-height: 156px;
+    padding: 12px 7px;
+    font-size: 0.66rem;
   }
 
   .showcase-drawer {
