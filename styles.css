@@ -157,8 +157,9 @@ button {
   top: 22%;
   right: 12px;
   min-width: 42px;
-  min-height: 176px;
-  padding: 14px 10px;
+  height: 116px;
+  min-height: 116px;
+  padding: 10px;
   border: 1px solid rgba(244, 239, 229, 0.16);
   border-radius: 999px;
   background: rgba(45, 39, 27, 0.94);
@@ -166,7 +167,7 @@ button {
   color: var(--ink);
   box-shadow: -10px 16px 36px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  font-size: 0.78rem;
+  font-size: 0.62rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -177,8 +178,10 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1px;
-  line-height: 1;
+  gap: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  letter-spacing: 0;
+  line-height: 0.78;
 }
 
 .showcase-handle:hover,
@@ -1717,8 +1720,9 @@ button {
   }
 
   .showcase-handle {
-    min-height: 154px;
-    font-size: 0.72rem;
+    height: 106px;
+    min-height: 106px;
+    font-size: 0.56rem;
   }
 
   .showcase-drawer {

@@ -33,7 +33,7 @@ const projects = [
     roleTag: "Writer · Director",
     carouselOrder: 1,
     imageSummary: "an upcoming live-action thriller about survival, guilt, and morality",
-    emphasisTerms: ["writing", "directing", "rough-cut sneak peek"],
+    emphasisTerms: ["writing", "directing"],
     showcaseGroup: "Upcoming Releases",
     poster: "",
     video: "assets/videos/the-last-round-rough-cut.mp4",

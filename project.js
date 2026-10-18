@@ -134,7 +134,7 @@ function renderProjectVideo(project) {
         project.videoType === "youtube"
           ? `<p class="video-help">If the embedded player does not load, this video may be unlisted or blocked from local playback. <a class="video-fallback-link" href="${fallbackHref}" target="_blank" rel="noopener noreferrer">Press here to watch it on YouTube.</a></p>`
           : project.videoNote
-            ? `<p class="video-help"><strong>Rough-cut teaser.</strong> ${project.videoNote}</p>`
+            ? `<p class="video-help">${project.videoNote}</p>`
             : ""
       }
     </section>
