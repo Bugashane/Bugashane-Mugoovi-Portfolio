@@ -159,7 +159,7 @@ button {
   min-width: 42px;
   height: 116px;
   min-height: 116px;
-  padding: 4px 10px;
+  padding: 10px;
   border: 1px solid rgba(244, 239, 229, 0.16);
   border-radius: 999px;
   background: rgba(45, 39, 27, 0.94);
@@ -167,7 +167,7 @@ button {
   color: var(--ink);
   box-shadow: -10px 16px 36px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  font-size: 0.68rem;
+  font-size: 0.55rem;
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -180,7 +180,7 @@ button {
   align-items: center;
   gap: 0;
   letter-spacing: 0;
-  line-height: 0.9;
+  line-height: 0.8;
 }
 
 .showcase-handle:hover,
@@ -1721,8 +1721,8 @@ button {
   .showcase-handle {
     height: 106px;
     min-height: 106px;
-    padding: 4px 10px;
-    font-size: 0.62rem;
+    padding: 8px 10px;
+    font-size: 0.5rem;
   }
 
   .showcase-drawer {
