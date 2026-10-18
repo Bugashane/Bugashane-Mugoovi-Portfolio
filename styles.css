@@ -179,7 +179,6 @@ button {
   flex-direction: column;
   align-items: center;
   gap: 0;
-  font-family: Georgia, "Times New Roman", serif;
   letter-spacing: 0;
   line-height: 0.78;
 }
