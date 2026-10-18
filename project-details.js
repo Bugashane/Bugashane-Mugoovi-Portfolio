@@ -135,24 +135,24 @@ window.projectDetails = {
     {
       title: "Overview",
       items: [
-        "The Call / Finding Your Dog is one of my biggest productions and part of a larger narrative-short or feature pipeline. I worked two roles at the same time: Continuity, alongside another continuity person, and DIT. I also helped wherever needed on set, including lighting setup."
+        "The Call / Finding Your Dog is one of my biggest productions and part of a larger narrative-short or feature pipeline. I worked as Script Supervisor and DIT, overseeing changes to the script and noting them down while also helping wherever needed on set, including lighting setup."
       ]
     },
     {
-      title: "Continuity",
+      title: "Script Notes",
       items: [
         "For every scene and every take, I logged what was played, what changed between takes, tone adjustments the director called for, and dialogue changes.",
         "The pace was fast, with some scenes running as short as about 30 seconds and only around 10 seconds before the next setup began, so I had to develop faster, sharper note-taking for this environment.",
-        "I tracked granular visual details across takes: lighting changes, camera position shifts, and actor wardrobe or prop details, such as an actor's hat angle shifting from one take to the next. When I caught a continuity error, I flagged it to the Assistant Director so it could be corrected before moving on.",
-        "Beyond continuity, I floated to wherever help was needed, like helping set up lights between continuity duties. That taught me to stay vigilant, finish my primary task, and proactively look for what else needed doing."
+        "I tracked granular visual details across takes: lighting changes, camera position shifts, and actor wardrobe or prop details, such as an actor's hat angle shifting from one take to the next. When I caught an issue, I flagged it to the Assistant Director so it could be corrected before moving on.",
+        "Beyond my script-supervision work, I floated to wherever help was needed, including lighting setup. That taught me to stay vigilant, finish my primary task, and proactively look for what else needed doing."
       ]
     },
     {
       title: "DIT and Media Management",
       items: [
         "As DIT, I owned footage from the moment it came off camera: transferring it to drives back at home base, uploading, numbering, organizing files, and designing the file system myself.",
-        "My folder system started with the movie name, then scenes numbered and lettered sequentially, such as Scene 1, Scene 1A, Scene 1B, Scene 2, Scene 2A, and so on. Inside each scene folder, the Continuity PDF for that scene sat at the top, with numbered takes below it.",
-        "The Continuity PDF existed so post-production could immediately see what changed take-to-take within a scene without digging through footage first.",
+        "My folder system started with the movie name, then scenes numbered and lettered sequentially, such as Scene 1, Scene 1A, Scene 1B, Scene 2, Scene 2A, and so on. Inside each scene folder, the script-notes PDF for that scene sat at the top, with numbered takes below it.",
+        "The script-notes PDF made it easy to see what changed take-to-take within a scene without digging through footage first.",
         "My backup protocol was to organize the day's footage after wrap, save it, then create a second backup copy onto a separate physical hard drive. The rule was always have a backup of backups.",
         "The biggest lesson was to build the file system so that anyone who picks it up later, even someone who was not there, can understand what happened and where everything is without needing me to explain it."
       ]

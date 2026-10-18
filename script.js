@@ -1,4 +1,3 @@
-const statusOrder = { current: 0, upcoming: 1, future: 2, past: 3 };
 const gradients = [
   "linear-gradient(145deg, #1b2520 0%, #8a7040 50%, #271b18 100%)",
   "linear-gradient(145deg, #182527 0%, #5b7f79 48%, #251715 100%)",
@@ -6,10 +5,7 @@ const gradients = [
   "linear-gradient(145deg, #211923 0%, #734d66 54%, #131816 100%)"
 ];
 
-const sortedProjects = [...projects].sort((a, b) => {
-  const statusDifference = statusOrder[a.status] - statusOrder[b.status];
-  return statusDifference || projects.indexOf(a) - projects.indexOf(b);
-});
+const sortedProjects = [...projects].sort((a, b) => a.carouselOrder - b.carouselOrder);
 
 let currentIndex = Math.max(0, sortedProjects.findIndex((project) => project.status === "current"));
 const carousel = document.querySelector(".carousel");
@@ -35,7 +31,7 @@ function getWrappedIndex(index) {
 
 function posterMarkup(project, index) {
   if (project.poster) {
-    return `<img class="poster" src="${project.poster}" alt="${project.title} poster" />`;
+    return `<img class="poster" src="${project.poster}" alt="${projectImageAlt(project)}" />`;
   }
 
   const initials = project.title
@@ -45,10 +41,20 @@ function posterMarkup(project, index) {
     .slice(0, 3);
 
   return `
-    <div class="poster-fallback" style="--poster-gradient: ${gradients[index % gradients.length]}">
+    <div class="poster-fallback" role="img" aria-label="${projectImageAlt(project)}" style="--poster-gradient: ${gradients[index % gradients.length]}">
       <div class="poster-mark">${initials}</div>
     </div>
   `;
+}
+
+function projectImageAlt(project) {
+  return `${project.title} poster, ${project.imageSummary}; Bugashane Mugoovi served as ${project.role}.`;
+}
+
+function directionCue(project, position) {
+  if (position === "right") return project.status === "upcoming" ? "Next Up" : "Recent Work";
+  if (position === "left") return project.carouselOrder === sortedProjects.length - 1 ? "Archive" : "Earlier Work";
+  return "";
 }
 
 function statusMarkup(project) {
@@ -87,7 +93,12 @@ function positionFor(index) {
 
 function updateCarousel() {
   document.querySelectorAll(".project-card").forEach((card) => {
-    card.dataset.position = positionFor(Number(card.dataset.index));
+    const index = Number(card.dataset.index);
+    const position = positionFor(index);
+    const cue = card.querySelector(".direction-cue");
+    card.dataset.position = position;
+    cue.textContent = directionCue(sortedProjects[index], position);
+    cue.hidden = !cue.textContent;
   });
 }
 
@@ -104,6 +115,7 @@ function buildCarousel() {
       [project.title, labelFor(project.status), project.roleTag].filter(Boolean).join(", ")
     );
     card.innerHTML = `
+      <span class="direction-cue" hidden></span>
       ${posterMarkup(project, index)}
       ${statusMarkup(project)}
       <div class="card-copy">
@@ -212,5 +224,6 @@ document.addEventListener("keydown", (event) => {
 });
 
 buildCarousel();
+updateCarousel();
 buildShowcase();
 setupShowcase();

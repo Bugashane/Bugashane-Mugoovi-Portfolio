@@ -1,8 +1,4 @@
-const statusOrder = { current: 0, upcoming: 1, future: 2, past: 3 };
-const sortedProjects = [...projects].sort((a, b) => {
-  const statusDifference = statusOrder[a.status] - statusOrder[b.status];
-  return statusDifference || projects.indexOf(a) - projects.indexOf(b);
-});
+const sortedProjects = [...projects].sort((a, b) => a.carouselOrder - b.carouselOrder);
 
 const gradients = [
   "linear-gradient(145deg, #1b2520 0%, #8a7040 50%, #271b18 100%)",
@@ -21,7 +17,7 @@ function labelFor(status) {
 
 function posterMarkup(project, index) {
   if (project.poster) {
-    return `<img class="poster" src="${project.poster}" alt="${project.title} poster" />`;
+    return `<img class="poster" src="${project.poster}" alt="${projectImageAlt(project)}" />`;
   }
 
   const initials = project.title
@@ -31,10 +27,14 @@ function posterMarkup(project, index) {
     .slice(0, 3);
 
   return `
-    <div class="poster-fallback" style="--poster-gradient: ${gradients[index % gradients.length]}">
+    <div class="poster-fallback" role="img" aria-label="${projectImageAlt(project)}" style="--poster-gradient: ${gradients[index % gradients.length]}">
       <div class="poster-mark">${initials}</div>
     </div>
   `;
+}
+
+function projectImageAlt(project) {
+  return `${project.title} poster, ${project.imageSummary}; Bugashane Mugoovi served as ${project.role}.`;
 }
 
 const params = new URLSearchParams(window.location.search);
@@ -58,46 +58,24 @@ function escapeHtml(value) {
   })[character]);
 }
 
-function emphasizeProjectText(value) {
-  const phrases = [
-    "pre-production",
-    "post-production",
-    "production sound",
-    "directed actors",
-    "lighting and sound",
-    "lighting",
-    "sound design",
-    "sound",
-    "editing",
-    "color grading",
-    "color",
-    "VFX",
-    "3D animation",
-    "animation",
-    "casting",
-    "scheduling",
-    "producing",
-    "producer responsibilities",
-    "writing",
-    "director responsibilities",
-    "continuity",
-    "DIT",
-    "media management",
-    "camera operator",
-    "camera",
-    "equipment rental",
-    "storyboard",
-    "storyboards",
-    "dialogue",
-    "audio",
-    "location",
-    "locations",
-    "task-management system",
-    "task management"
-  ];
-  const pattern = new RegExp(`\\b(${phrases.sort((a, b) => b.length - a.length).join("|")})\\b`, "gi");
-  return escapeHtml(value).replace(pattern, "<strong>$1</strong>");
+function createProjectEmphasizer(project) {
+  const usedTerms = new Set();
+  const terms = [...(project.emphasisTerms || [])].sort((a, b) => b.length - a.length);
+
+  return (value) => {
+    let text = escapeHtml(value);
+    terms.forEach((term) => {
+      if (usedTerms.has(term)) return;
+      const pattern = new RegExp(`\\b(${term.replace(/[.*+?^${}()|[\\]\\\\]/g, "\\\\$&")})\\b`, "i");
+      if (!pattern.test(text)) return;
+      text = text.replace(pattern, "<strong>$1</strong>");
+      usedTerms.add(term);
+    });
+    return text;
+  };
 }
+
+const emphasizeProjectText = createProjectEmphasizer(project);
 
 function projectTagsMarkup() {
   const tags = [
@@ -184,10 +162,10 @@ function renderProjectDocuments(project) {
   `;
 }
 
-function renderGalleryButton(image, index, galleryKey, className) {
+function renderGalleryButton(image, index, galleryKey, className, altText = image.alt) {
   return `
-    <button class="${className}" type="button" data-gallery="${galleryKey}" data-gallery-index="${index}" aria-label="Open photo ${index + 1}">
-      <img src="${image.src}" alt="${image.alt}" loading="lazy" />
+    <button class="${className}" type="button" data-gallery="${galleryKey}" data-gallery-index="${index}" aria-label="Open ${altText}">
+      <img src="${image.src}" alt="${altText}" loading="lazy" />
     </button>
   `;
 }
@@ -197,6 +175,10 @@ function renderGallery(project) {
 
   const gallery = window.projectGalleries?.[project.slug];
   if (!gallery?.length) return "";
+
+  gallery.forEach((image, index) => {
+    image.alt = `${project.title} production photo ${index + 1}, ${project.imageSummary}; Bugashane Mugoovi served as ${project.role}.`;
+  });
 
   return `
     <section class="project-gallery" aria-label="${project.title} photo gallery">
@@ -218,6 +200,10 @@ function renderWartimeProcess() {
 
   const images = window.wartimeProcessImages || [];
   const docs = window.wartimeDocuments || [];
+
+  images.forEach((image, index) => {
+    image.alt = `Wartime planning material ${index + 1}, for a hybrid 3D animation and live-action student production; Bugashane Mugoovi served as Co-Director and Producer.`;
+  });
 
   return `
     <section class="wartime-process">

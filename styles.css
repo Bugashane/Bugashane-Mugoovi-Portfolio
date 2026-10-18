@@ -157,11 +157,12 @@ button {
   top: 22%;
   right: 12px;
   min-width: 42px;
-  min-height: 116px;
+  min-height: 126px;
   padding: 14px 10px;
   border: 1px solid rgba(244, 239, 229, 0.16);
   border-radius: 999px;
-  background: rgba(23, 24, 21, 0.9);
+  background: rgba(45, 39, 27, 0.94);
+  border-color: rgba(209, 173, 98, 0.28);
   color: var(--ink);
   box-shadow: -10px 16px 36px rgba(0, 0, 0, 0.2);
   cursor: pointer;
@@ -176,6 +177,7 @@ button {
 .showcase-handle:hover,
 .showcase-handle:focus-visible {
   color: var(--accent);
+  background: rgba(58, 48, 30, 0.96);
 }
 
 .showcase-is-open .showcase-handle {
@@ -508,6 +510,33 @@ button {
   background:
     linear-gradient(180deg, rgba(0, 0, 0, 0.25), transparent 32%),
     linear-gradient(0deg, rgba(0, 0, 0, 0.86), transparent 58%);
+}
+
+.direction-cue {
+  position: absolute;
+  z-index: 5;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  min-height: 24px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 10px;
+  border: 1px solid rgba(209, 173, 98, 0.28);
+  border-radius: 999px;
+  background: rgba(22, 24, 21, 0.78);
+  color: rgba(244, 239, 229, 0.74);
+  font-size: 0.65rem;
+  font-weight: 850;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+.project-card[data-position="left"] .card-labels,
+.project-card[data-position="right"] .card-labels {
+  top: 42px;
 }
 
 .project-card.is-reel::before {
@@ -1374,6 +1403,19 @@ button {
   margin-top: 42px;
 }
 
+.contact-about-summary {
+  max-width: 76ch;
+  margin: 42px auto 0;
+  border-top: 1px solid rgba(244, 239, 229, 0.18);
+  padding-top: 18px;
+}
+
+.contact-about-summary p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.68;
+}
+
 .contact-form-section {
   max-width: 680px;
   margin: 58px auto 0;
@@ -1668,7 +1710,7 @@ button {
   }
 
   .showcase-handle {
-    min-height: 102px;
+    min-height: 110px;
     font-size: 0.68rem;
   }
 
