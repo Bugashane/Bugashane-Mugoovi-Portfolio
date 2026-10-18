@@ -52,7 +52,7 @@ function projectImageAlt(project) {
 }
 
 function directionCue(project, position) {
-  if (position === "right") return project.status === "upcoming" ? "Next Up" : "Recent Work";
+  if (position === "right") return "Up Next";
   if (position === "left") return project.carouselOrder === sortedProjects.length - 1 ? "Archive" : "Earlier Work";
   return "";
 }
