@@ -18,8 +18,8 @@ window.projectDetails = {
       title: "Production and Post-Production",
       items: [
         "During production I directed actors and made lighting and sound decisions on set to match each scene's intended mood, using the mood boards from pre-production as the guide. I also made some scene changes during production, which taught me how important clarity of vision and communication are before the shoot begins.",
-        "I am currently editing the film, color grading it, and adding VFX. The film includes a scene requiring 3D animation, which I built myself because there was no budget to hire that out. That also meant managing render time and understanding how animation work changes post-production planning.",
-        "This project is the first time I have experienced nearly every role in the filmmaking process directly: writing, directing, producing, casting, scheduling, lighting, sound, editing, color, VFX, and animation."
+        "I am currently working closely with my editor to guide the film's edit, color work, and visual effects. The film includes a scene requiring 3D animation, which I am building myself because there was no budget to hire that out. That also means managing render time and understanding how animation work changes post-production planning.",
+        "This project is the first time I have experienced nearly every part of the filmmaking process directly: writing, directing, producing, casting, scheduling, lighting, sound, editorial collaboration, color, visual effects, and animation."
       ]
     }
   ],

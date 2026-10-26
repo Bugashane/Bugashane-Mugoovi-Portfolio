@@ -19,7 +19,7 @@ const projects = [
     logline:
       "An original short about grief, acceptance, and a younger brother trying to process another loss before healing from the first.",
     details:
-      "Wrote and revised the script, built mood boards and storyboards, led casting, secured locations, planned equipment, coordinated student crew schedules, directed actors, and now continue the post-production work through editing, color, VFX, and a 3D animation sequence."
+      "Wrote and revised the script, built mood boards and storyboards, led casting, secured locations, planned equipment, coordinated student crew schedules, and directed actors. I now work closely with my editor to guide the post-production process, including color, VFX, and a 3D animation sequence I am building myself."
   },
   {
     title: "The Last Round",
