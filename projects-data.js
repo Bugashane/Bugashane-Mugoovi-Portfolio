@@ -82,18 +82,18 @@ const projects = [
     productionStatus: "Completed",
     format: "Live Action",
     year: "2025",
-    role: "Sound Recordist / Editor / Sound Designer",
-    roleTag: "Sound · Editing",
+    role: "Production Sound Mixer",
+    roleTag: "Production Sound",
     carouselOrder: 7,
-    imageSummary: "an experimental live-action short shaped by production sound and lighting support",
-    emphasisTerms: ["sound needs", "scouted locations", "sound coverage", "lighting"],
+    imageSummary: "an experimental live-action short supported by on-set production sound",
+    emphasisTerms: ["production sound", "sound mixing"],
     showcaseGroup: "Sound",
     poster: "assets/posters/juxtaposed.png",
     video: "assets/videos/juxtaposed.mp4",
     logline:
-      "An experimental short shaped through production sound planning, lighting support, and post-production editing choices.",
+      "An experimental live-action short supported by on-set production sound.",
     details:
-      "Mapped the script scene by scene for sound needs, scouted locations for noise issues, built a checklist for post-production sound coverage, supported lighting, and worked with footage, selects, pacing, color, and audio through final export."
+      "Handled on-set production sound and sound mixing for the film."
   },
   {
     title: "Funeral For Bro",

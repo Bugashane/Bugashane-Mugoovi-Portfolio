@@ -81,18 +81,9 @@ window.projectDetails = {
   ],
   "juxtaposed": [
     {
-      title: "Sound and Production Role",
+      title: "Production Sound",
       items: [
-        "Juxtaposed was a 6+ person experimental short. My recorded notes describe my role as sound, plus some help with lighting. I went through the script scene by scene to identify which scenes had dialogue and which scenes did not, and for the dialogue-free scenes I identified what sound or effects could substitute for dialogue.",
-        "I scouted the different shoot locations ahead of time specifically to check for outside noise because most scenes were shot indoors. I built a Google Form checklist of what I anticipated post-production would need for sound, and flagged which scenes needed extra care so the narrative stayed clear through sound alone.",
-        "Because I was newer to audio at the time, my approach was to capture as much as possible rather than risk missing something post-production might need later."
-      ]
-    },
-    {
-      title: "Editing and Sound Design",
-      items: [
-        "My resume drafts also credit this project as Editor/Sound Designer. I worked directly with footage, selects, and timelines, building the piece from raw material through final export and delivery.",
-        "I made deliberate creative choices about pacing, color, and audio to serve the film's concept and delivered a polished, export-ready final cut."
+        "Juxtaposed was an experimental live-action short. I handled production sound and sound mixing on set."
       ]
     }
   ],
