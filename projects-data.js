@@ -151,14 +151,14 @@ const projects = [
     roleTag: "Editing Assistant · Script Supervisor · DIT",
     carouselOrder: 4,
     imageSummary: "a large live-action narrative production with fast script changes and media management",
-    emphasisTerms: ["Script Supervisor", "script changes", "DIT", "lighting"],
+    emphasisTerms: ["Script Supervisor", "script changes", "DIT", "media management"],
     showcaseGroup: "Script Supervision",
     poster: "assets/posters/finding-your-dog.png",
     video: "",
     logline:
       "A larger narrative production where script changes and digital media management had to stay organized under fast set conditions.",
     details:
-      "As Script Supervisor, I oversaw changes to the script and noted them down while also supporting lighting and set needs. I transferred and backed up footage as DIT, designed a clear scene-and-take folder structure with script notes, and maintained NDA-sensitive production materials."
+      "As Script Supervisor, I oversaw changes to the script and noted them down while helping wherever needed on set. I transferred and backed up footage as DIT, designed a clear scene-and-take folder structure with script notes, and maintained NDA-sensitive production materials."
   },
   {
     title: "Developing World",

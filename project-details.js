@@ -126,7 +126,7 @@ window.projectDetails = {
     {
       title: "Overview",
       items: [
-        "The Call / Finding Your Dog is one of my biggest productions and part of a larger narrative-short or feature pipeline. I worked as Script Supervisor and DIT, overseeing changes to the script and noting them down while also helping wherever needed on set, including lighting setup."
+        "The Call / Finding Your Dog is one of my biggest productions and part of a larger narrative-short or feature pipeline. I worked as Script Supervisor and DIT, overseeing changes to the script, noting them down, and helping wherever needed on set."
       ]
     },
     {
@@ -134,8 +134,8 @@ window.projectDetails = {
       items: [
         "For every scene and every take, I logged what was played, what changed between takes, tone adjustments the director called for, and dialogue changes.",
         "The pace was fast, with some scenes running as short as about 30 seconds and only around 10 seconds before the next setup began, so I had to develop faster, sharper note-taking for this environment.",
-        "I tracked granular visual details across takes: lighting changes, camera position shifts, and actor wardrobe or prop details, such as an actor's hat angle shifting from one take to the next. When I caught an issue, I flagged it to the Assistant Director so it could be corrected before moving on.",
-        "Beyond my script-supervision work, I floated to wherever help was needed, including lighting setup. That taught me to stay vigilant, finish my primary task, and proactively look for what else needed doing."
+        "I tracked granular visual details across takes: camera position shifts and actor wardrobe or prop details, such as an actor's hat angle shifting from one take to the next. When I caught an issue, I flagged it to the Assistant Director so it could be corrected before moving on.",
+        "Beyond my script-supervision work, I helped wherever needed on set. That taught me to stay vigilant, finish my primary task, and proactively look for what else needed doing."
       ]
     },
     {

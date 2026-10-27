@@ -1,14 +1,6 @@
 window.projectGalleries = {
   "developing-world": [
     {
-      "src": "assets/gallery/developing-world/01-douna-00000001.png",
-      "alt": "Developing World production photo 1"
-    },
-    {
-      "src": "assets/gallery/developing-world/02-douna-00000002.png",
-      "alt": "Developing World production photo 2"
-    },
-    {
       "src": "assets/gallery/developing-world/03-douna-00000003.png",
       "alt": "Developing World production photo 3"
     },
@@ -23,10 +15,6 @@ window.projectGalleries = {
     {
       "src": "assets/gallery/developing-world/06-douna-00000006.png",
       "alt": "Developing World production photo 6"
-    },
-    {
-      "src": "assets/gallery/developing-world/07-douna-00000007.png",
-      "alt": "Developing World production photo 7"
     },
     {
       "src": "assets/gallery/developing-world/08-douna-00000008.png",
@@ -45,30 +33,6 @@ window.projectGalleries = {
       "alt": "Developing World production photo 11"
     },
     {
-      "src": "assets/gallery/developing-world/12-img-4737.jpg",
-      "alt": "Developing World production photo 12"
-    },
-    {
-      "src": "assets/gallery/developing-world/13-img-4738.jpg",
-      "alt": "Developing World production photo 13"
-    },
-    {
-      "src": "assets/gallery/developing-world/14-img-4739.jpg",
-      "alt": "Developing World production photo 14"
-    },
-    {
-      "src": "assets/gallery/developing-world/15-img-4740.jpg",
-      "alt": "Developing World production photo 15"
-    },
-    {
-      "src": "assets/gallery/developing-world/16-img-4741.jpg",
-      "alt": "Developing World production photo 16"
-    },
-    {
-      "src": "assets/gallery/developing-world/17-img-4742.jpg",
-      "alt": "Developing World production photo 17"
-    },
-    {
       "src": "assets/gallery/developing-world/18-img-4743.jpg",
       "alt": "Developing World production photo 18"
     },
@@ -83,10 +47,6 @@ window.projectGalleries = {
     {
       "src": "assets/gallery/developing-world/21-img-4747.jpg",
       "alt": "Developing World production photo 21"
-    },
-    {
-      "src": "assets/gallery/developing-world/22-img-4748.jpg",
-      "alt": "Developing World production photo 22"
     },
     {
       "src": "assets/gallery/developing-world/23-photo-album-1-00000001.jpeg",
@@ -105,16 +65,8 @@ window.projectGalleries = {
       "alt": "Developing World production photo 26"
     },
     {
-      "src": "assets/gallery/developing-world/27-photo-album-1-00000028.jpeg",
-      "alt": "Developing World production photo 27"
-    },
-    {
       "src": "assets/gallery/developing-world/28-photo-album-1-00000029.jpeg",
       "alt": "Developing World production photo 28"
-    },
-    {
-      "src": "assets/gallery/developing-world/29-photo-album-1-00000031.jpeg",
-      "alt": "Developing World production photo 29"
     },
     {
       "src": "assets/gallery/developing-world/30-photo-album-1-00000045.jpeg",
@@ -247,14 +199,6 @@ window.projectGalleries = {
   ],
   "juxtaposed": [
     {
-      "src": "assets/gallery/juxtaposed/01-img-3165.jpg",
-      "alt": "JUXTAPOSED production photo 1"
-    },
-    {
-      "src": "assets/gallery/juxtaposed/02-img-3166.jpg",
-      "alt": "JUXTAPOSED production photo 2"
-    },
-    {
       "src": "assets/gallery/juxtaposed/03-pxl-20251201-185026441.jpg",
       "alt": "JUXTAPOSED production photo 3"
     },
@@ -263,37 +207,13 @@ window.projectGalleries = {
       "alt": "JUXTAPOSED production photo 4"
     },
     {
-      "src": "assets/gallery/juxtaposed/05-pxl-20251207-035320033.jpg",
-      "alt": "JUXTAPOSED production photo 5"
-    },
-    {
-      "src": "assets/gallery/juxtaposed/06-pxl-20251207-035322102.jpg",
-      "alt": "JUXTAPOSED production photo 6"
-    },
-    {
       "src": "assets/gallery/juxtaposed/07-pxl-20251207-035323293.jpg",
       "alt": "JUXTAPOSED production photo 7"
-    },
-    {
-      "src": "assets/gallery/juxtaposed/08-pxl-20251207-035702641.jpg",
-      "alt": "JUXTAPOSED production photo 8"
-    },
-    {
-      "src": "assets/gallery/juxtaposed/09-pxl-20251207-045927727.jpg",
-      "alt": "JUXTAPOSED production photo 9"
     },
     {
       "src": "assets/gallery/juxtaposed/10-pxl-20251207-050156013.jpg",
       "alt": "JUXTAPOSED production photo 10"
     },
-    {
-      "src": "assets/gallery/juxtaposed/11-pxl-20251207-051551889.jpg",
-      "alt": "JUXTAPOSED production photo 11"
-    },
-    {
-      "src": "assets/gallery/juxtaposed/12-pxl-20251207-051621512.jpg",
-      "alt": "JUXTAPOSED production photo 12"
-    }
   ],
   "punk-house": [
     {
@@ -369,37 +289,13 @@ window.projectGalleries = {
       "alt": "Trail's End production photo 3"
     },
     {
-      "src": "assets/gallery/trails-end/04-img-4526.jpg",
-      "alt": "Trail's End production photo 4"
-    },
-    {
       "src": "assets/gallery/trails-end/05-img-4528.jpg",
       "alt": "Trail's End production photo 5"
-    },
-    {
-      "src": "assets/gallery/trails-end/06-img-4529.jpg",
-      "alt": "Trail's End production photo 6"
-    },
-    {
-      "src": "assets/gallery/trails-end/07-img-4559.jpg",
-      "alt": "Trail's End production photo 7"
     },
     {
       "src": "assets/gallery/trails-end/08-img-4560.jpg",
       "alt": "Trail's End production photo 8"
     },
-    {
-      "src": "assets/gallery/trails-end/09-img-5660.jpg",
-      "alt": "Trail's End production photo 9"
-    },
-    {
-      "src": "assets/gallery/trails-end/10-img-5661.jpg",
-      "alt": "Trail's End production photo 10"
-    },
-    {
-      "src": "assets/gallery/trails-end/11-img-5662.jpg",
-      "alt": "Trail's End production photo 11"
-    }
   ]
 };
 
