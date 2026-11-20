@@ -46,7 +46,7 @@ status: "upcoming" // upcoming release, shown after the current feature
 status: "past"    // past project
 ```
 
-Use `roleTag` for the short role shown on project cards and pages, `showcaseGroup` for the Showcase drawer section, and `tempPoster: true` when a placeholder poster should be labeled.
+Use `roleTag` for the short role shown on project cards and pages, `filmographyCategories` for one or more Filmography accordion categories, and `tempPoster: true` when a placeholder poster should be labeled.
 
 Use `productionStatus` only when it is useful for a public-facing label. Right now the site only displays it on Finding Your Dog.
 

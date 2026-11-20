@@ -12,7 +12,7 @@ const projects = [
     carouselOrder: 0,
     imageSummary: "a live-action and animation short about grief and acceptance",
     emphasisTerms: ["Wrote and revised", "storyboards", "casting", "locations", "equipment", "schedules", "directed actors"],
-    showcaseGroup: "Directing",
+    filmographyCategories: ["directing"],
     tempPoster: true,
     poster: "assets/posters/sweet-slumber.jpg",
     video: "",
@@ -34,7 +34,7 @@ const projects = [
     carouselOrder: 1,
     imageSummary: "an upcoming live-action thriller about survival, guilt, and morality",
     emphasisTerms: ["writing", "directing"],
-    showcaseGroup: "Upcoming Releases",
+    filmographyCategories: ["directing"],
     poster: "",
     video: "assets/videos/the-last-round-rough-cut.mp4",
     videoNote: "This is a rough-cut teaser from the opening, assembled to preview the film's progress. It is not the final cut.",
@@ -66,7 +66,7 @@ const projects = [
     carouselOrder: 9,
     imageSummary: "a hybrid 3D animation and live-action narrative made by a student team",
     emphasisTerms: ["Co-directed", "producer responsibilities", "task-management system", "filming logistics", "equipment needs"],
-    showcaseGroup: "Directing",
+    filmographyCategories: ["directing"],
     poster: "assets/posters/wartime.jpg",
     video: "assets/videos/wartime.mp4",
     logline:
@@ -87,7 +87,7 @@ const projects = [
     carouselOrder: 7,
     imageSummary: "an experimental live-action short supported by on-set production sound",
     emphasisTerms: ["production sound", "sound mixing"],
-    showcaseGroup: "Sound",
+    filmographyCategories: ["sound"],
     poster: "assets/posters/juxtaposed.png",
     video: "assets/videos/juxtaposed.mp4",
     logline:
@@ -108,7 +108,7 @@ const projects = [
     carouselOrder: 2,
     imageSummary: "a senior capstone narrative short centered on clear dialogue and organized production audio",
     emphasisTerms: ["boom", "dialogue", "structured stems", "ADR recording"],
-    showcaseGroup: "Sound",
+    filmographyCategories: ["sound"],
     poster: "assets/posters/funeral-for-bro.png",
     video: "assets/videos/funeral-for-bro.mp4",
     logline:
@@ -129,7 +129,7 @@ const projects = [
     carouselOrder: 3,
     imageSummary: "a senior capstone short featuring a basement band performance",
     emphasisTerms: ["Recorded dialogue", "environmental sound", "two-take", "Foley", "SFX"],
-    showcaseGroup: "Sound",
+    filmographyCategories: ["sound"],
     poster: "assets/posters/punk-house.jpg",
     video: "https://www.youtube.com/embed/WOkyFRa-SfM?si=E0MO0je_1-SIQ8zn",
     videoUrl: "https://www.youtube.com/watch?v=WOkyFRa-SfM",
@@ -152,7 +152,7 @@ const projects = [
     carouselOrder: 4,
     imageSummary: "a large live-action narrative production with fast script changes and media management",
     emphasisTerms: ["Script Supervisor", "script changes", "DIT", "media management"],
-    showcaseGroup: "Script Supervision",
+    filmographyCategories: ["script-supervisor", "on-set-support"],
     poster: "assets/posters/finding-your-dog.png",
     video: "",
     logline:
@@ -173,7 +173,7 @@ const projects = [
     carouselOrder: 5,
     imageSummary: "a live-action short using lighting and sound to create mood in tight spaces",
     emphasisTerms: ["lighting", "sound", "boom operation"],
-    showcaseGroup: "On-Set Support",
+    filmographyCategories: ["sound", "on-set-support"],
     tempPoster: true,
     poster: "assets/posters/developing-world.jpg",
     video: "",
@@ -195,7 +195,7 @@ const projects = [
     carouselOrder: 6,
     imageSummary: "an outdoor narrative short shaped by wind, wardrobe movement, and night ambience",
     emphasisTerms: ["sound", "dialogue", "mic placement", "ambient"],
-    showcaseGroup: "Sound",
+    filmographyCategories: ["sound"],
     tempPoster: true,
     poster: "assets/posters/trails-end.jpg",
     video: "",
@@ -203,27 +203,5 @@ const projects = [
       "An outdoor narrative short where wind, wardrobe movement, and night ambience shaped the production sound strategy.",
     details:
       "Tracked wind forecasts, planned around outdoor dialogue risks, studied the script for sound-critical moments, managed mic placement against wardrobe movement, and captured dialogue plus ambient/night-exterior sound. Public footage should wait until the music-rights issue is resolved."
-  },
-  {
-    title: "Live Event Recording",
-    slug: "live-event-recording",
-    kind: "project",
-    status: "past",
-    productionStatus: "Completed",
-    format: "Live Event",
-    year: "2025",
-    role: "Camera Operator",
-    roleTag: "Camera Operation",
-    carouselOrder: 8,
-    imageSummary: "live theatre and dance recordings for Purdue productions",
-    emphasisTerms: ["Operated Sony mirrorless cameras", "framing", "camera-angle decisions", "exposure", "white balance"],
-    showcaseGroup: "Camera",
-    tempPoster: true,
-    poster: "",
-    video: "",
-    logline:
-      "Live theatre and dance recording for Purdue productions including The Snow and PCDC Winter Works.",
-    details:
-      "Operated Sony mirrorless cameras during live performances, made real-time framing and camera-angle decisions, managed exposure and white balance, and captured production-ready footage in environments with no option for reshoots."
   }
 ];

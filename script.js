@@ -53,7 +53,7 @@ function projectImageAlt(project) {
 
 function directionCue(project, position) {
   if (position === "right") return "Up Next";
-  if (position === "left") return project.carouselOrder === sortedProjects.length - 1 ? "Archive" : "Earlier Work";
+  if (position === "left") return project === sortedProjects[sortedProjects.length - 1] ? "Archive" : "Earlier Work";
   return "";
 }
 
@@ -147,33 +147,72 @@ function moveCarousel(direction) {
   updateCarousel();
 }
 
+const filmographyCategories = [
+  { id: "directing", label: "Directing" },
+  { id: "sound", label: "Sound" },
+  { id: "script-supervisor", label: "Script Supervisor" },
+  { id: "on-set-support", label: "On-Set Support" },
+  { id: "camera", label: "Camera" }
+];
+
 function buildShowcase() {
   const list = document.querySelector(".showcase-list");
-  const groups = new Map();
+  const categories = filmographyCategories
+    .map((category) => ({
+      ...category,
+      projects: sortedProjects.filter((project) => project.filmographyCategories?.includes(category.id))
+    }))
+    .filter((category) => category.projects.length);
 
-  sortedProjects.forEach((project) => {
-    const group = project.showcaseGroup || "Other Work";
-    if (!groups.has(group)) groups.set(group, []);
-    groups.get(group).push(project);
+  list.innerHTML = categories
+    .map(
+      (category) => `
+        <section class="showcase-category">
+          <button
+            class="showcase-category-toggle"
+            type="button"
+            aria-expanded="false"
+            aria-controls="filmography-${category.id}"
+          >
+            <span>${category.label}</span>
+            <svg class="showcase-chevron" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="m6 9 6 6 6-6" />
+            </svg>
+          </button>
+          <div class="showcase-category-content" id="filmography-${category.id}" aria-hidden="true" inert>
+            <div class="showcase-category-projects">
+              ${category.projects
+                .map(
+                  (project) => `
+                    <a class="showcase-project" href="project.html?project=${project.slug}">
+                      <span>${project.title}</span>
+                      <small>${project.roleTag || project.format}</small>
+                    </a>
+                  `
+                )
+                .join("")}
+            </div>
+          </div>
+        </section>
+      `
+    )
+    .join("");
+
+  list.addEventListener("click", (event) => {
+    const toggle = event.target.closest(".showcase-category-toggle");
+    if (!toggle) return;
+
+    const wasExpanded = toggle.getAttribute("aria-expanded") === "true";
+
+    list.querySelectorAll(".showcase-category-toggle").forEach((button) => {
+      const content = document.getElementById(button.getAttribute("aria-controls"));
+      const shouldExpand = button === toggle && !wasExpanded;
+      button.setAttribute("aria-expanded", String(shouldExpand));
+      content.classList.toggle("is-expanded", shouldExpand);
+      content.setAttribute("aria-hidden", String(!shouldExpand));
+      content.inert = !shouldExpand;
+    });
   });
-
-  list.innerHTML = Array.from(groups, ([group, items]) => `
-    <section class="showcase-group">
-      <h3>${group}</h3>
-      <div class="showcase-projects">
-        ${items
-          .map(
-            (project) => `
-              <a class="showcase-project" href="project.html?project=${project.slug}">
-                <span>${project.title}</span>
-                <small>${project.roleTag || project.format}</small>
-              </a>
-            `
-          )
-          .join("")}
-      </div>
-    </section>
-  `).join("");
 }
 
 function setupShowcase() {
@@ -185,6 +224,15 @@ function setupShowcase() {
 
   function setOpen(nextOpen) {
     isOpen = nextOpen;
+    if (isOpen) {
+      drawer.querySelectorAll(".showcase-category-toggle").forEach((button) => {
+        const content = document.getElementById(button.getAttribute("aria-controls"));
+        button.setAttribute("aria-expanded", "false");
+        content.classList.remove("is-expanded");
+        content.setAttribute("aria-hidden", "true");
+        content.inert = true;
+      });
+    }
     drawer.classList.toggle("is-open", isOpen);
     document.body.classList.toggle("showcase-is-open", isOpen);
     drawer.setAttribute("aria-hidden", String(!isOpen));
